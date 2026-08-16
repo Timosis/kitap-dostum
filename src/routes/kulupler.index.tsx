@@ -40,9 +40,9 @@ function ClubsPage() {
           <button
             key={g}
             onClick={() => setGenre(g)}
-            className={`shrink-0 rounded-full border px-3.5 py-1.5 text-sm transition-colors ${
+            className={`press shrink-0 rounded-full border px-3.5 py-1.5 text-sm transition-colors ${
               genre === g
-                ? "border-primary bg-primary text-primary-foreground"
+                ? "border-transparent gradient-warm text-primary-foreground shadow-[0_8px_20px_-12px_var(--color-primary)]"
                 : "border-border bg-card text-muted-foreground"
             }`}
           >
@@ -57,9 +57,10 @@ function ClubsPage() {
             key={club.slug}
             to="/kulupler/$slug"
             params={{ slug: club.slug }}
-            className="card-paper flex overflow-hidden"
+            className="card-paper press flex overflow-hidden"
           >
             <div className="spine w-1.5 shrink-0" style={{ backgroundColor: club.spine }} />
+
             <div className="min-w-0 flex-1 p-4">
               <div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-2">
                 <div className="min-w-0">

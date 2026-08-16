@@ -33,19 +33,28 @@ const features = [
 function Index() {
   return (
     <div className="mx-auto max-w-md px-4 py-5">
-      <section className="card-paper overflow-hidden">
-        <img
-          src={heroImage}
-          alt="Kitap yığını, kahve ve okuma köşesi illüstrasyonu"
-          width={1600}
-          height={1008}
-          className="h-40 w-full object-cover"
-        />
-        <div className="p-5">
+      <section className="card-paper relative overflow-hidden">
+        <div className="relative">
+          <img
+            src={heroImage}
+            alt="Kitap yığını, kahve ve okuma köşesi illüstrasyonu"
+            width={1600}
+            height={1008}
+            className="h-44 w-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-card via-card/25 to-transparent" />
+          <span className="absolute top-3 left-3 rounded-full bg-background/80 px-3 py-1 text-[11px] font-medium tracking-wide backdrop-blur">
+            Bu hafta 6 buluşma
+          </span>
+        </div>
+        <div className="-mt-3 p-5">
           <p className="text-eyebrow">Okuma kulüpleri için</p>
-          <h1 className="mt-1.5 text-3xl leading-tight font-semibold">
+          <h1 className="mt-1.5 text-[2rem] leading-[1.1] font-semibold">
             Birlikte okumanın
-            <span className="text-primary"> en güzel hâli</span>
+            <span className="bg-gradient-to-r from-primary to-gold bg-clip-text text-transparent">
+              {" "}
+              en güzel hâli
+            </span>
           </h1>
           <p className="mt-2.5 text-sm text-muted-foreground">
             Kulübünü kur, üyeleri bir arada tut, her buluşmayı zamanında planla.
@@ -53,13 +62,13 @@ function Index() {
           <div className="mt-4 flex flex-col gap-2">
             <Link
               to="/kulupler"
-              className="rounded-xl bg-primary px-5 py-3 text-center text-sm font-medium text-primary-foreground"
+              className="press gradient-warm rounded-xl px-5 py-3.5 text-center text-sm font-semibold text-primary-foreground shadow-[0_12px_28px_-14px_var(--color-primary)]"
             >
               Kulüpleri keşfet
             </Link>
             <Link
               to="/takvim"
-              className="rounded-xl border border-border bg-card px-5 py-3 text-center text-sm font-medium"
+              className="press rounded-xl border border-border bg-card px-5 py-3.5 text-center text-sm font-medium"
             >
               Buluşma takvimi
             </Link>
@@ -73,9 +82,11 @@ function Index() {
           [String(clubs.length), "kulüp"],
           ["24", "kitap"],
         ].map(([n, l]) => (
-          <div key={l} className="card-paper px-3 py-3 text-center">
-            <dt className="font-display text-xl font-semibold">{n}</dt>
-            <dd className="text-xs text-muted-foreground">{l}</dd>
+          <div key={l} className="card-paper px-3 py-3.5 text-center">
+            <dt className="font-display text-2xl font-semibold text-primary">{n}</dt>
+            <dd className="mt-0.5 text-[11px] tracking-wide text-muted-foreground uppercase">
+              {l}
+            </dd>
           </div>
         ))}
       </dl>
@@ -85,7 +96,7 @@ function Index() {
         <div className="mt-3 grid grid-cols-2 gap-3">
           {features.map((f) => (
             <div key={f.title} className="card-paper p-4">
-              <span className="flex size-9 items-center justify-center rounded-lg bg-accent text-accent-foreground">
+              <span className="flex size-10 items-center justify-center rounded-xl bg-accent text-primary ring-1 ring-border/70">
                 <f.icon className="size-4.5" />
               </span>
               <h3 className="mt-3 text-sm font-semibold">{f.title}</h3>
@@ -94,6 +105,7 @@ function Index() {
           ))}
         </div>
       </section>
+
 
       <section className="mt-7">
         <div className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-2">
@@ -108,7 +120,7 @@ function Index() {
               key={club.slug}
               to="/kulupler/$slug"
               params={{ slug: club.slug }}
-              className="card-paper flex overflow-hidden"
+              className="card-paper press flex overflow-hidden"
             >
               <div className="spine w-1.5 shrink-0" style={{ backgroundColor: club.spine }} />
               <div className="grid min-w-0 flex-1 grid-cols-[minmax(0,1fr)_auto] items-center gap-2 p-4">
@@ -128,17 +140,23 @@ function Index() {
 
       <section className="mt-7">
         <h2 className="text-lg font-semibold">Bu haftaki buluşmalar</h2>
-        <ul className="card-paper mt-3 divide-y divide-border px-4">
+        <ul className="card-paper mt-3 divide-y divide-border/70 px-4">
           {meetings.slice(0, 3).map((m) => (
-            <li key={m.slug} className="py-3">
-              <p className="truncate text-sm font-medium">{m.club}</p>
-              <p className="mt-0.5 truncate text-xs text-muted-foreground">
-                {m.date} · {m.time} · {m.place}
-              </p>
+            <li key={m.slug} className="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-3 py-3">
+              <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-accent font-display text-xs font-semibold text-accent-foreground">
+                {m.date.split(" ")[0]}
+              </span>
+              <span className="min-w-0">
+                <span className="block truncate text-sm font-medium">{m.club}</span>
+                <span className="mt-0.5 block truncate text-xs text-muted-foreground">
+                  {m.time} · {m.place}
+                </span>
+              </span>
             </li>
           ))}
         </ul>
       </section>
+
     </div>
   );
 }
