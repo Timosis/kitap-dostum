@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
-import { CalendarDays, MapPin, Users } from "lucide-react";
+import { CalendarDays, ChevronRight, MapPin, Users } from "lucide-react";
 import { clubs } from "@/data/clubs";
 
 export const Route = createFileRoute("/kulupler/")({
@@ -28,23 +28,22 @@ function ClubsPage() {
   const list = genre === "Tümü" ? clubs : clubs.filter((c) => c.genre === genre);
 
   return (
-    <div className="mx-auto max-w-6xl px-5 py-14">
+    <div className="mx-auto max-w-md px-4 py-6">
       <p className="text-eyebrow">Keşfet</p>
-      <h1 className="mt-2 text-4xl font-semibold">Kulüpler</h1>
-      <p className="mt-3 max-w-xl text-muted-foreground">
-        {clubs.length} aktif kulüp, her biri kendi ritmiyle okuyor. Sana uyanı seç,
-        bir sonraki buluşmaya katıl.
+      <h1 className="mt-1 text-2xl font-semibold">Kulüpler</h1>
+      <p className="mt-2 text-sm text-muted-foreground">
+        {clubs.length} aktif kulüp, her biri kendi ritmiyle okuyor.
       </p>
 
-      <div className="mt-8 flex flex-wrap gap-2">
+      <div className="-mx-4 mt-5 flex gap-2 overflow-x-auto px-4 pb-1 [scrollbar-width:none]">
         {genres.map((g) => (
           <button
             key={g}
             onClick={() => setGenre(g)}
-            className={`rounded-full border px-4 py-1.5 text-sm transition-colors ${
+            className={`shrink-0 rounded-full border px-3.5 py-1.5 text-sm transition-colors ${
               genre === g
                 ? "border-primary bg-primary text-primary-foreground"
-                : "border-border bg-card text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+                : "border-border bg-card text-muted-foreground"
             }`}
           >
             {g}
@@ -52,34 +51,35 @@ function ClubsPage() {
         ))}
       </div>
 
-      <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-5 space-y-3">
         {list.map((club) => (
           <Link
             key={club.slug}
             to="/kulupler/$slug"
             params={{ slug: club.slug }}
-            className="card-paper card-paper-hover group flex flex-col overflow-hidden"
+            className="card-paper flex overflow-hidden"
           >
-            <div className="spine h-2 w-full" style={{ backgroundColor: club.spine }} />
-            <div className="flex flex-1 flex-col p-6">
-              <span className="text-eyebrow">{club.genre}</span>
-              <h2 className="mt-2 text-xl font-semibold">{club.name}</h2>
-              <p className="mt-2 flex-1 text-sm text-muted-foreground">{club.tagline}</p>
-              <dl className="mt-5 space-y-2 text-sm text-muted-foreground">
-                <div className="flex items-center gap-2">
-                  <MapPin className="size-4 text-primary" /> {club.city}
+            <div className="spine w-1.5 shrink-0" style={{ backgroundColor: club.spine }} />
+            <div className="min-w-0 flex-1 p-4">
+              <div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-2">
+                <div className="min-w-0">
+                  <span className="text-eyebrow">{club.genre}</span>
+                  <h2 className="mt-1 truncate text-lg font-semibold">{club.name}</h2>
                 </div>
-                <div className="flex items-center gap-2">
-                  <Users className="size-4 text-primary" /> {club.members} üye
-                </div>
-                <div className="flex items-center gap-2">
-                  <CalendarDays className="size-4 text-primary" /> {club.cadence}
-                </div>
+                <ChevronRight className="mt-1 size-5 shrink-0 text-muted-foreground" />
+              </div>
+              <p className="mt-1.5 text-sm text-muted-foreground">{club.tagline}</p>
+              <dl className="mt-3 flex flex-wrap gap-x-4 gap-y-1.5 text-xs text-muted-foreground">
+                <span className="flex items-center gap-1.5">
+                  <MapPin className="size-3.5 shrink-0 text-primary" /> {club.city}
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <Users className="size-3.5 shrink-0 text-primary" /> {club.members}
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <CalendarDays className="size-3.5 shrink-0 text-primary" /> {club.cadence}
+                </span>
               </dl>
-              <p className="mt-5 border-t border-border pt-4 text-sm">
-                <span className="text-muted-foreground">Şu an okunuyor: </span>
-                <span className="font-medium">{club.currentBook.title}</span>
-              </p>
             </div>
           </Link>
         ))}
