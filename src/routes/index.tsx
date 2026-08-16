@@ -1,7 +1,16 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { BookMarked, CalendarDays, ChevronRight, MessagesSquare, Users } from "lucide-react";
+import {
+  BookMarked,
+  CalendarDays,
+  ChevronRight,
+  MessagesSquare,
+  Quote,
+  Users,
+} from "lucide-react";
 import heroImage from "@/assets/hero-kitap.jpg";
 import { clubs, meetings } from "@/data/clubs";
+import { quoteOfTheDay } from "@/data/quotes";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
