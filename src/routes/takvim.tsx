@@ -23,37 +23,38 @@ export const Route = createFileRoute("/takvim")({
 
 function TakvimPage() {
   return (
-    <div className="mx-auto max-w-3xl px-5 py-14">
+    <div className="mx-auto max-w-md px-4 py-6">
       <p className="text-eyebrow">Program</p>
-      <h1 className="mt-2 text-4xl font-semibold">Buluşma takvimi</h1>
-      <p className="mt-3 text-muted-foreground">
+      <h1 className="mt-1 text-2xl font-semibold">Buluşma takvimi</h1>
+      <p className="mt-2 text-sm text-muted-foreground">
         Yaklaşan tüm kulüp buluşmaları tek yerde.
       </p>
 
-      <ol className="mt-10 space-y-4">
+      <ol className="mt-6 space-y-3">
         {meetings.map((m) => (
-          <li key={m.slug} className="card-paper card-paper-hover p-5">
-            <div className="flex flex-wrap items-baseline justify-between gap-2">
+          <li key={m.slug} className="card-paper p-4">
+            <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2">
               <Link
                 to="/kulupler/$slug"
                 params={{ slug: m.slug }}
-                className="font-display text-xl font-semibold hover:text-primary"
+                className="truncate font-display text-lg font-semibold"
               >
                 {m.club}
               </Link>
-              <span className="rounded-full bg-accent px-3 py-1 text-sm text-accent-foreground">
+              <span className="shrink-0 rounded-full bg-accent px-2.5 py-1 text-xs text-accent-foreground">
                 {m.date}
               </span>
             </div>
-            <p className="mt-2 text-sm text-muted-foreground">
+            <p className="mt-1.5 text-sm text-muted-foreground">
               Okunan kitap: <span className="text-foreground">{m.book}</span>
             </p>
-            <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted-foreground">
-              <span className="flex items-center gap-2">
-                <Clock className="size-4 text-primary" /> {m.time}
+            <div className="mt-2.5 flex flex-wrap gap-x-4 gap-y-1.5 text-sm text-muted-foreground">
+              <span className="flex items-center gap-1.5">
+                <Clock className="size-4 shrink-0 text-primary" /> {m.time}
               </span>
-              <span className="flex items-center gap-2">
-                <MapPin className="size-4 text-primary" /> {m.place}
+              <span className="flex min-w-0 items-center gap-1.5">
+                <MapPin className="size-4 shrink-0 text-primary" />
+                <span className="truncate">{m.place}</span>
               </span>
             </div>
           </li>

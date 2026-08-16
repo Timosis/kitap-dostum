@@ -33,78 +33,76 @@ function ClubDetail() {
   const [joined, setJoined] = useState(false);
 
   return (
-    <div className="mx-auto max-w-4xl px-5 py-12">
+    <div className="mx-auto max-w-md px-4 py-5">
       <Link
         to="/kulupler"
-        className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
+        className="inline-flex items-center gap-2 text-sm text-muted-foreground"
       >
-        <ArrowLeft className="size-4" /> Tüm kulüpler
+        <ArrowLeft className="size-4" /> Kulüpler
       </Link>
 
-      <div className="card-paper mt-6 overflow-hidden">
-        <div className="spine h-3 w-full" style={{ backgroundColor: club.spine }} />
-        <div className="p-8">
+      <div className="card-paper mt-4 overflow-hidden">
+        <div className="spine h-2.5 w-full" style={{ backgroundColor: club.spine }} />
+        <div className="p-5">
           <span className="text-eyebrow">{club.genre}</span>
-          <h1 className="mt-2 text-4xl font-semibold">{club.name}</h1>
-          <p className="mt-3 text-muted-foreground">{club.tagline}</p>
+          <h1 className="mt-1 text-2xl font-semibold">{club.name}</h1>
+          <p className="mt-2 text-sm text-muted-foreground">{club.tagline}</p>
 
-          <div className="mt-6 flex flex-wrap gap-x-6 gap-y-3 text-sm text-muted-foreground">
-            <span className="flex items-center gap-2">
-              <MapPin className="size-4 text-primary" /> {club.city}
+          <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-sm text-muted-foreground">
+            <span className="flex items-center gap-1.5">
+              <MapPin className="size-4 shrink-0 text-primary" /> {club.city}
             </span>
-            <span className="flex items-center gap-2">
-              <Users className="size-4 text-primary" /> {club.members} üye
+            <span className="flex items-center gap-1.5">
+              <Users className="size-4 shrink-0 text-primary" /> {club.members} üye
             </span>
-            <span className="flex items-center gap-2">
-              <CalendarDays className="size-4 text-primary" /> {club.cadence}
+            <span className="flex items-center gap-1.5">
+              <CalendarDays className="size-4 shrink-0 text-primary" /> {club.cadence}
             </span>
           </div>
-
-          <button
-            onClick={() => setJoined((v) => !v)}
-            className={`mt-7 rounded-lg px-5 py-2.5 text-sm font-medium transition-colors ${
-              joined
-                ? "bg-secondary text-secondary-foreground"
-                : "bg-primary text-primary-foreground hover:opacity-90"
-            }`}
-          >
-            {joined ? "Katıldın ✓" : "Kulübe katıl"}
-          </button>
         </div>
       </div>
 
-      <div className="mt-6 grid gap-6 md:grid-cols-2">
-        <section className="card-paper p-6">
-          <h2 className="text-lg font-semibold">Şu an okunuyor</h2>
-          <p className="mt-3 font-display text-2xl">{club.currentBook.title}</p>
-          <p className="text-sm text-muted-foreground">{club.currentBook.author}</p>
-          <div className="mt-5 h-2 w-full overflow-hidden rounded-full bg-muted">
-            <div
-              className="h-full rounded-full bg-primary transition-all"
-              style={{ width: `${club.currentBook.progress}%` }}
-            />
-          </div>
-          <p className="mt-2 text-sm text-muted-foreground">
-            Kulüp ortalaması %{club.currentBook.progress}
-          </p>
-        </section>
+      <section className="card-paper mt-4 p-5">
+        <h2 className="text-base font-semibold">Şu an okunuyor</h2>
+        <p className="mt-2 font-display text-xl">{club.currentBook.title}</p>
+        <p className="text-sm text-muted-foreground">{club.currentBook.author}</p>
+        <div className="mt-4 h-2 w-full overflow-hidden rounded-full bg-muted">
+          <div
+            className="h-full rounded-full bg-primary transition-all"
+            style={{ width: `${club.currentBook.progress}%` }}
+          />
+        </div>
+        <p className="mt-2 text-sm text-muted-foreground">
+          Kulüp ortalaması %{club.currentBook.progress}
+        </p>
+      </section>
 
-        <section className="card-paper p-6">
-          <h2 className="text-lg font-semibold">Sonraki buluşma</h2>
-          <p className="mt-3 font-display text-2xl">{club.nextMeeting.date}</p>
-          <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-            <li className="flex items-center gap-2">
-              <Clock className="size-4 text-primary" /> {club.nextMeeting.time}
-            </li>
-            <li className="flex items-center gap-2">
-              <MapPin className="size-4 text-primary" /> {club.nextMeeting.place}
-            </li>
-          </ul>
-          <p className="mt-5 rounded-lg bg-muted p-3 text-sm">
-            Bu buluşmada kitabın ilk yarısı konuşulacak. Not defterini getir.
-          </p>
-        </section>
-      </div>
+      <section className="card-paper mt-4 p-5">
+        <h2 className="text-base font-semibold">Sonraki buluşma</h2>
+        <p className="mt-2 font-display text-xl">{club.nextMeeting.date}</p>
+        <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
+          <li className="flex items-center gap-2">
+            <Clock className="size-4 shrink-0 text-primary" /> {club.nextMeeting.time}
+          </li>
+          <li className="flex items-center gap-2">
+            <MapPin className="size-4 shrink-0 text-primary" /> {club.nextMeeting.place}
+          </li>
+        </ul>
+        <p className="mt-4 rounded-lg bg-muted p-3 text-sm">
+          Bu buluşmada kitabın ilk yarısı konuşulacak. Not defterini getir.
+        </p>
+      </section>
+
+      <button
+        onClick={() => setJoined((v) => !v)}
+        className={`mt-5 w-full rounded-xl px-5 py-3.5 text-sm font-medium transition-colors ${
+          joined
+            ? "bg-secondary text-secondary-foreground"
+            : "bg-primary text-primary-foreground"
+        }`}
+      >
+        {joined ? "Katıldın ✓" : "Kulübe katıl"}
+      </button>
     </div>
   );
 }
