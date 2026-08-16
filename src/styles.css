@@ -168,8 +168,13 @@
 
 @utility card-paper {
   background-color: var(--color-card);
+  background-image: linear-gradient(
+    160deg,
+    oklch(1 0 0 / 0.5),
+    transparent 55%
+  );
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-xl);
+  border-radius: var(--radius-2xl);
   box-shadow: var(--shadow-paper);
   transition:
     transform 240ms ease,
@@ -183,6 +188,28 @@
   }
 }
 
+@utility press {
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease;
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+@utility gradient-warm {
+  background-image: linear-gradient(
+    135deg,
+    var(--color-primary),
+    var(--color-gold)
+  );
+}
+
+@utility glass-bar {
+  background-color: color-mix(in oklab, var(--color-background) 78%, transparent);
+  backdrop-filter: blur(16px) saturate(140%);
+}
+
 @utility spine {
   background-image: linear-gradient(
     180deg,
@@ -191,3 +218,4 @@
     oklch(0 0 0 / 0.12)
   );
 }
+
