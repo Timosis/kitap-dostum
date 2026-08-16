@@ -40,6 +40,8 @@ const features = [
 ];
 
 function Index() {
+  const daily = quoteOfTheDay();
+
   return (
     <div className="mx-auto max-w-md px-4 py-5">
       <section className="card-paper relative overflow-hidden">
