@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { BookMarked, CalendarDays, MessagesSquare, Users } from "lucide-react";
+import { BookMarked, CalendarDays, ChevronRight, MessagesSquare, Users } from "lucide-react";
 import heroImage from "@/assets/hero-kitap.jpg";
 import { clubs, meetings } from "@/data/clubs";
 
@@ -24,138 +24,120 @@ export const Route = createFileRoute("/")({
 });
 
 const features = [
-  {
-    icon: Users,
-    title: "Kulübünü kur",
-    text: "Dakikalar içinde bir kulüp aç, üyeleri davet et, okuma ritmini belirle.",
-  },
-  {
-    icon: BookMarked,
-    title: "İlerlemeyi izle",
-    text: "Herkesin kaçıncı sayfada olduğunu gör; kimse spoiler yemeden ilerlesin.",
-  },
-  {
-    icon: CalendarDays,
-    title: "Buluşmaları planla",
-    text: "Tarih, saat ve mekânı paylaş; hatırlatmalar otomatik gitsin.",
-  },
-  {
-    icon: MessagesSquare,
-    title: "Bölüm bölüm tartış",
-    text: "Alıntılar, notlar ve sorular bölümlere göre düzenli dursun.",
-  },
+  { icon: Users, title: "Kulübünü kur", text: "Dakikalar içinde bir kulüp aç." },
+  { icon: BookMarked, title: "İlerlemeyi izle", text: "Kim kaçıncı sayfada gör." },
+  { icon: CalendarDays, title: "Buluşma planla", text: "Tarih, saat ve mekân paylaş." },
+  { icon: MessagesSquare, title: "Bölüm tartış", text: "Notlar ve alıntılar düzenli." },
 ];
 
 function Index() {
   return (
-    <div>
-      <section className="mx-auto grid max-w-6xl items-center gap-12 px-5 py-16 lg:grid-cols-2 lg:py-24">
-        <div>
+    <div className="mx-auto max-w-md px-4 py-5">
+      <section className="card-paper overflow-hidden">
+        <img
+          src={heroImage}
+          alt="Kitap yığını, kahve ve okuma köşesi illüstrasyonu"
+          width={1600}
+          height={1008}
+          className="h-40 w-full object-cover"
+        />
+        <div className="p-5">
           <p className="text-eyebrow">Okuma kulüpleri için</p>
-          <h1 className="mt-4 text-5xl leading-[1.05] font-semibold sm:text-6xl">
+          <h1 className="mt-1.5 text-3xl leading-tight font-semibold">
             Birlikte okumanın
             <span className="text-primary"> en güzel hâli</span>
           </h1>
-          <p className="mt-5 max-w-md text-lg text-muted-foreground">
-            Sayfa Arası; kitap kulübünü kurmanı, üyeleri bir arada tutmanı ve her
-            buluşmayı zamanında planlamanı sağlar.
+          <p className="mt-2.5 text-sm text-muted-foreground">
+            Kulübünü kur, üyeleri bir arada tut, her buluşmayı zamanında planla.
           </p>
-          <div className="mt-8 flex flex-wrap gap-3">
+          <div className="mt-4 flex flex-col gap-2">
             <Link
               to="/kulupler"
-              className="rounded-lg bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
+              className="rounded-xl bg-primary px-5 py-3 text-center text-sm font-medium text-primary-foreground"
             >
               Kulüpleri keşfet
             </Link>
             <Link
               to="/takvim"
-              className="rounded-lg border border-border bg-card px-6 py-3 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
+              className="rounded-xl border border-border bg-card px-5 py-3 text-center text-sm font-medium"
             >
               Buluşma takvimi
             </Link>
           </div>
-          <dl className="mt-10 flex gap-8">
-            {[
-              ["139", "okur"],
-              [String(clubs.length), "aktif kulüp"],
-              ["24", "kitap"],
-            ].map(([n, l]) => (
-              <div key={l}>
-                <dt className="font-display text-3xl font-semibold">{n}</dt>
-                <dd className="text-sm text-muted-foreground">{l}</dd>
-              </div>
-            ))}
-          </dl>
-        </div>
-        <div className="card-paper overflow-hidden">
-          <img
-            src={heroImage}
-            alt="Kitap yığını, kahve ve okuma köşesi illüstrasyonu"
-            width={1600}
-            height={1008}
-            className="h-full w-full object-cover"
-          />
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-5 py-8">
-        <h2 className="text-3xl font-semibold">Kulübün için gereken her şey</h2>
-        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <dl className="mt-4 grid grid-cols-3 gap-2">
+        {[
+          ["139", "okur"],
+          [String(clubs.length), "kulüp"],
+          ["24", "kitap"],
+        ].map(([n, l]) => (
+          <div key={l} className="card-paper px-3 py-3 text-center">
+            <dt className="font-display text-xl font-semibold">{n}</dt>
+            <dd className="text-xs text-muted-foreground">{l}</dd>
+          </div>
+        ))}
+      </dl>
+
+      <section className="mt-7">
+        <h2 className="text-lg font-semibold">Kulübün için her şey</h2>
+        <div className="mt-3 grid grid-cols-2 gap-3">
           {features.map((f) => (
-            <div key={f.title} className="card-paper card-paper-hover p-6">
-              <span className="flex size-10 items-center justify-center rounded-lg bg-accent text-accent-foreground">
-                <f.icon className="size-5" />
+            <div key={f.title} className="card-paper p-4">
+              <span className="flex size-9 items-center justify-center rounded-lg bg-accent text-accent-foreground">
+                <f.icon className="size-4.5" />
               </span>
-              <h3 className="mt-4 text-lg font-semibold">{f.title}</h3>
-              <p className="mt-2 text-sm text-muted-foreground">{f.text}</p>
+              <h3 className="mt-3 text-sm font-semibold">{f.title}</h3>
+              <p className="mt-1 text-xs text-muted-foreground">{f.text}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-5 py-16">
-        <div className="flex items-baseline justify-between">
-          <h2 className="text-3xl font-semibold">Öne çıkan kulüpler</h2>
-          <Link to="/kulupler" className="text-sm text-primary hover:underline">
-            Tümünü gör
+      <section className="mt-7">
+        <div className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-2">
+          <h2 className="truncate text-lg font-semibold">Öne çıkan kulüpler</h2>
+          <Link to="/kulupler" className="shrink-0 text-sm text-primary">
+            Tümü
           </Link>
         </div>
-        <div className="mt-8 grid gap-6 md:grid-cols-3">
+        <div className="mt-3 space-y-3">
           {clubs.slice(0, 3).map((club) => (
             <Link
               key={club.slug}
               to="/kulupler/$slug"
               params={{ slug: club.slug }}
-              className="card-paper card-paper-hover overflow-hidden"
+              className="card-paper flex overflow-hidden"
             >
-              <div className="spine h-2 w-full" style={{ backgroundColor: club.spine }} />
-              <div className="p-6">
-                <span className="text-eyebrow">{club.genre}</span>
-                <h3 className="mt-2 text-xl font-semibold">{club.name}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">{club.tagline}</p>
-                <p className="mt-4 text-sm text-muted-foreground">
-                  {club.city} · {club.members} üye
-                </p>
+              <div className="spine w-1.5 shrink-0" style={{ backgroundColor: club.spine }} />
+              <div className="grid min-w-0 flex-1 grid-cols-[minmax(0,1fr)_auto] items-center gap-2 p-4">
+                <div className="min-w-0">
+                  <span className="text-eyebrow">{club.genre}</span>
+                  <h3 className="mt-1 truncate text-base font-semibold">{club.name}</h3>
+                  <p className="mt-1 truncate text-xs text-muted-foreground">
+                    {club.city} · {club.members} üye
+                  </p>
+                </div>
+                <ChevronRight className="size-5 shrink-0 text-muted-foreground" />
               </div>
             </Link>
           ))}
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-5 pb-8">
-        <div className="card-paper p-8">
-          <h2 className="text-2xl font-semibold">Bu haftaki buluşmalar</h2>
-          <ul className="mt-6 divide-y divide-border">
-            {meetings.slice(0, 3).map((m) => (
-              <li key={m.slug} className="flex flex-wrap justify-between gap-2 py-4">
-                <span className="font-medium">{m.club}</span>
-                <span className="text-sm text-muted-foreground">
-                  {m.date} · {m.time} · {m.place}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
+      <section className="mt-7">
+        <h2 className="text-lg font-semibold">Bu haftaki buluşmalar</h2>
+        <ul className="card-paper mt-3 divide-y divide-border px-4">
+          {meetings.slice(0, 3).map((m) => (
+            <li key={m.slug} className="py-3">
+              <p className="truncate text-sm font-medium">{m.club}</p>
+              <p className="mt-0.5 truncate text-xs text-muted-foreground">
+                {m.date} · {m.time} · {m.place}
+              </p>
+            </li>
+          ))}
+        </ul>
       </section>
     </div>
   );
