@@ -10,33 +10,63 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as TakvimRouteImport } from './routes/takvim'
+import { Route as KuluplerIndexRouteImport } from './routes/kulupler.index'
+import { Route as KuluplerSlugRouteImport } from './routes/kulupler.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TakvimRoute = TakvimRouteImport.update({
+  id: '/takvim',
+  path: '/takvim',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KuluplerIndexRoute = KuluplerIndexRouteImport.update({
+  id: '/kulupler/',
+  path: '/kulupler/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KuluplerSlugRoute = KuluplerSlugRouteImport.update({
+  id: '/kulupler/$slug',
+  path: '/kulupler/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/takvim': typeof TakvimRoute
+  '/kulupler/$slug': typeof KuluplerSlugRoute
+  '/kulupler/': typeof KuluplerIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/takvim': typeof TakvimRoute
+  '/kulupler/$slug': typeof KuluplerSlugRoute
+  '/kulupler': typeof KuluplerIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/takvim': typeof TakvimRoute
+  '/kulupler/$slug': typeof KuluplerSlugRoute
+  '/kulupler/': typeof KuluplerIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/takvim' | '/kulupler/$slug' | '/kulupler/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/takvim' | '/kulupler/$slug' | '/kulupler'
+  id: '__root__' | '/' | '/takvim' | '/kulupler/$slug' | '/kulupler/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  TakvimRoute: typeof TakvimRoute
+  KuluplerSlugRoute: typeof KuluplerSlugRoute
+  KuluplerIndexRoute: typeof KuluplerIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +78,35 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/takvim': {
+      id: '/takvim'
+      path: '/takvim'
+      fullPath: '/takvim'
+      preLoaderRoute: typeof TakvimRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kulupler/': {
+      id: '/kulupler/'
+      path: '/kulupler'
+      fullPath: '/kulupler/'
+      preLoaderRoute: typeof KuluplerIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kulupler/$slug': {
+      id: '/kulupler/$slug'
+      path: '/kulupler/$slug'
+      fullPath: '/kulupler/$slug'
+      preLoaderRoute: typeof KuluplerSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  TakvimRoute: TakvimRoute,
+  KuluplerSlugRoute: KuluplerSlugRoute,
+  KuluplerIndexRoute: KuluplerIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
