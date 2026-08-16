@@ -66,9 +66,9 @@ function ClubDetail() {
         <h2 className="text-base font-semibold">Şu an okunuyor</h2>
         <p className="mt-2 font-display text-xl">{club.currentBook.title}</p>
         <p className="text-sm text-muted-foreground">{club.currentBook.author}</p>
-        <div className="mt-4 h-2 w-full overflow-hidden rounded-full bg-muted">
+        <div className="mt-4 h-2.5 w-full overflow-hidden rounded-full bg-muted">
           <div
-            className="h-full rounded-full bg-primary transition-all"
+            className="gradient-warm h-full rounded-full transition-all"
             style={{ width: `${club.currentBook.progress}%` }}
           />
         </div>
@@ -88,21 +88,22 @@ function ClubDetail() {
             <MapPin className="size-4 shrink-0 text-primary" /> {club.nextMeeting.place}
           </li>
         </ul>
-        <p className="mt-4 rounded-lg bg-muted p-3 text-sm">
+        <p className="mt-4 rounded-xl border border-border/70 bg-accent/60 p-3 text-sm">
           Bu buluşmada kitabın ilk yarısı konuşulacak. Not defterini getir.
         </p>
       </section>
 
       <button
         onClick={() => setJoined((v) => !v)}
-        className={`mt-5 w-full rounded-xl px-5 py-3.5 text-sm font-medium transition-colors ${
+        className={`press mt-5 w-full rounded-xl px-5 py-3.5 text-sm font-semibold transition-colors ${
           joined
             ? "bg-secondary text-secondary-foreground"
-            : "bg-primary text-primary-foreground"
+            : "gradient-warm text-primary-foreground shadow-[0_12px_28px_-14px_var(--color-primary)]"
         }`}
       >
         {joined ? "Katıldın ✓" : "Kulübe katıl"}
       </button>
+
     </div>
   );
 }
