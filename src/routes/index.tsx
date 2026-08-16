@@ -120,7 +120,7 @@ function Index() {
               key={club.slug}
               to="/kulupler/$slug"
               params={{ slug: club.slug }}
-              className="card-paper flex overflow-hidden"
+              className="card-paper press flex overflow-hidden"
             >
               <div className="spine w-1.5 shrink-0" style={{ backgroundColor: club.spine }} />
               <div className="grid min-w-0 flex-1 grid-cols-[minmax(0,1fr)_auto] items-center gap-2 p-4">
@@ -140,17 +140,23 @@ function Index() {
 
       <section className="mt-7">
         <h2 className="text-lg font-semibold">Bu haftaki buluşmalar</h2>
-        <ul className="card-paper mt-3 divide-y divide-border px-4">
+        <ul className="card-paper mt-3 divide-y divide-border/70 px-4">
           {meetings.slice(0, 3).map((m) => (
-            <li key={m.slug} className="py-3">
-              <p className="truncate text-sm font-medium">{m.club}</p>
-              <p className="mt-0.5 truncate text-xs text-muted-foreground">
-                {m.date} · {m.time} · {m.place}
-              </p>
+            <li key={m.slug} className="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-3 py-3">
+              <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-accent font-display text-xs font-semibold text-accent-foreground">
+                {m.date.split(" ")[0]}
+              </span>
+              <span className="min-w-0">
+                <span className="block truncate text-sm font-medium">{m.club}</span>
+                <span className="mt-0.5 block truncate text-xs text-muted-foreground">
+                  {m.time} · {m.place}
+                </span>
+              </span>
             </li>
           ))}
         </ul>
       </section>
+
     </div>
   );
 }
