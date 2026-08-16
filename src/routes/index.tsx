@@ -91,6 +91,22 @@ function Index() {
         ))}
       </dl>
 
+      <section className="card-paper relative mt-4 overflow-hidden p-5">
+        <div className="gradient-warm absolute inset-y-0 left-0 w-1.5" />
+        <div className="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-2">
+          <Quote className="size-4 text-gold" />
+          <p className="text-eyebrow">Günün alıntısı</p>
+        </div>
+        <blockquote className="mt-3 font-display text-lg leading-snug">
+          “{daily.text}”
+        </blockquote>
+        <p className="mt-3 text-xs text-muted-foreground">
+          <span className="font-medium text-foreground">{daily.author}</span> · {daily.book}
+        </p>
+      </section>
+
+
+
       <section className="mt-7">
         <h2 className="text-lg font-semibold">Kulübün için her şey</h2>
         <div className="mt-3 grid grid-cols-2 gap-3">
